@@ -25,7 +25,7 @@ bottommost stream in the stack of composed streams. The null stream is:
 >
 > Use Null to redirect output to a stream that will not consume any operating system resources. When the methods of Stream that provide writing are invoked on Null, the call simply returns, and no data is written. Null also implements a Read method that returns zero without reading data.
 
-I must confess that I wrote my own `NullStream` class (deriving from the abstract [Stream](https://msdn.microsoft.com/en-us/library/system.io.stream.aspx) class) until I spotted that the BCL provides [`Stream.Null`](https://msdn.microsoft.com/en-us/library/system.io.stream.null.aspx).
+I must confess that I wrote my own `NullStream` class (deriving from the abstract [Stream](https://msdn.microsoft.com/en-us/library/system.io.stream.aspx) class) until I spotted that the FCL provides [`Stream.Null`](https://msdn.microsoft.com/en-us/library/system.io.stream.null.aspx).
 
 ## Links
 
