@@ -7,13 +7,11 @@ namespace HashObject
 {
     public static class ObjectHasher
     {
-        private static readonly NullStream NullBaseStream = new NullStream();
-
         public static string ComputeHash<T>(T obj)
         {
             using (var md5 = MD5.Create())
             {
-                using (var cryptoStream = new CryptoStream(NullBaseStream, md5, CryptoStreamMode.Write))
+                using (var cryptoStream = new CryptoStream(Stream.Null, md5, CryptoStreamMode.Write))
                 {
                     using (var streamWriter = new StreamWriter(cryptoStream))
                     using (var jsonTextWriter = new JsonTextWriter(streamWriter))
