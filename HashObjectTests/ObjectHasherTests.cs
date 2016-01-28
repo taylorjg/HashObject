@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using HashObject;
 using NUnit.Framework;
 
@@ -86,6 +87,28 @@ namespace HashGraph
             var hash1 = ObjectHasher.ComputeHash(obj1);
             var hash2 = ObjectHasher.ComputeHash(obj2);
             Assert.That(hash1, Is.Not.EqualTo(hash2));
+        }
+
+        [Test]
+        public void CanUseMetadataTypeAttributeToExcludeSomeThings()
+        {
+            var obj1 = new Complex
+            {
+                Prop1 = new[] {1.0f},
+                Prop2 = new[] {1.0d},
+                Prop3 = new[] {Vector3.One},
+                Prop4 = DateTime.MinValue
+            };
+            var obj2 = new Complex
+            {
+                Prop1 = new[] {1.0f},
+                Prop2 = new[] {1.0d},
+                Prop3 = new[] {Vector3.One},
+                Prop4 = DateTime.MaxValue
+            };
+            var hash1 = ObjectHasher.ComputeHash(obj1);
+            var hash2 = ObjectHasher.ComputeHash(obj2);
+            Assert.That(hash1, Is.EqualTo(hash2));
         }
     }
 }
