@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Bson;
 
 namespace HashObject
 {
@@ -13,11 +14,10 @@ namespace HashObject
             {
                 using (var cryptoStream = new CryptoStream(Stream.Null, md5, CryptoStreamMode.Write))
                 {
-                    using (var streamWriter = new StreamWriter(cryptoStream))
-                    using (var jsonTextWriter = new JsonTextWriter(streamWriter))
+                    using (var bsonWriter = new BsonWriter(cryptoStream))
                     {
                         var jsonSerializer = new JsonSerializer();
-                        jsonSerializer.Serialize(jsonTextWriter, obj);
+                        jsonSerializer.Serialize(bsonWriter, obj);
                     }
                 }
                 var hashBytes = md5.Hash;
